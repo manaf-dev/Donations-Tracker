@@ -1,0 +1,157 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body {
+    background-color: #D3D9D4;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 80px;
+    background-color: #748D92;
+    color: #fff;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 999;
+}
+
+header .logo img{
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+header .title {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 3pt;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+main {
+    display: flex;
+    display: -webkit-flex;
+}
+
+aside {
+    /* flex: 1; */
+    position: fixed;
+    background-color: #124E66;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    color: #fff;
+    /* padding: 50px 30px 50px 50px; */
+}
+
+aside nav {
+    margin-top: 150px;
+}
+
+aside li a {
+    font-size: 25px;
+    margin-top: 15px;
+    padding: 10px 50px;
+    display: block;
+}
+
+aside li a:hover, aside li a:active, aside li a:focus {
+    color: #124E66;
+    background-color: #D3D9D4;
+}
+
+section {
+    /* flex: 4; */
+    margin-left: 300px;
+    margin-top: 60px;
+}
+
+
+/* HOME CONTENT STYLES */
+
+section .home-btns {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    font-weight: 500;
+    padding: 7px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #124E66;
+    border: 1px solid #124E66;
+}
+
+.btn-primary:hover {
+    background-color: #124e66c5;
+}
+
+.btn-secondary {
+    background-color: #D3D9D4;
+    border: 1px solid #124E66;
+}
+.btn-secondary a {
+    color: #124E66;
+}
+
+.btn-secondary:hover {
+    background-color: #c8cdc9;
+    
+}
+
+
+.home-content {
+    /* width: 100%; */
+    margin: auto;
+    margin-left: 80px;
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+    column-gap: 40px;
+    row-gap: 20px;
+}
+
+.card{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.card-title {
+    text-align: center;
+    font-size: 18px;
+    color: #979696;
+}
+
+.card-text {
+    font-size: 5rem;
+    font-weight: 600;
+    width: fit-content;
+    margin: auto;
+}
+

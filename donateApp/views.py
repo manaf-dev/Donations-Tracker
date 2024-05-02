@@ -4,4 +4,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return HttpResponse('Are you willing to donate?')
+    return render(request, 'donateApp/index.html')
+
+
+def events(request):
+    return render(request, 'donateApp/events.html')

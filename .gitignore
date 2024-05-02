@@ -11,7 +11,7 @@ db.sqlite3-journal
 #uploaded profile pictures
 media/
 
-static/
+/static
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files

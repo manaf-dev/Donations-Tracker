@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% block title %}Home{% endblock title %}
+
+
+
+
+{% block content %}
+
+{% block side-bar %}
+    {% include 'side-bar.html' %}
+{% endblock side-bar %}
+
+
+<section>
+    <div class="home-btns">
+        <div class="btn btn-primary">
+            <a href="#">Create New Event</a>
+        </div>
+        <div class="btn btn-secondary">
+            <a href="#">Buy SMS</a>
+        </div>
+    </div>
+    <div class="home-content">
+        <div class="card">
+            <div class="card-title">Completed Events</div>
+            <div class="card-text">5</div>
+        </div>
+        <div class="card">
+            <div class="card-title">In-Progress Events</div>
+            <div class="card-text">5</div>
+        </div>
+        <div class="card">
+            <div class="card-title">Due Events</div>
+            <div class="card-text">5</div>
+        </div>
+        <div class="card">
+            <div class="card-title">SMS Balance</div>
+            <div class="card-text">5</div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+    
