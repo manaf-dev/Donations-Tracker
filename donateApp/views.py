@@ -8,4 +8,16 @@ def home(request):
 
 
 def events(request):
-    return render(request, 'donateApp/events.html')
+    return render(request, 'donateApp/event_list.html')
+
+
+def event_detail(request):
+    return render(request, 'donateApp/event_detail.html')
+
+
+def donate(request):
+    return render(request, 'donateApp/donate.html')
+
+
+def amount(request):
+    return render(request, 'donateApp/amount.html')

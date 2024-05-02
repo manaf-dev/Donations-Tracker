@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Events{% endblock title %}
+
+
+{% block content %}
+    {% include 'side-bar.html' %}
+
+    <section>
+        <div class="events-btn">
+            <div class="btn btn-primary">
+                <a href="#">Create New Event</a>
+            </div>
+        </div>
+        <table class="events-table" border="1">
+            <thead>
+                <th>S/N</th>
+                <th>Event Title</th>
+                <th>Date Created</th>
+                <th>Status</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <td>1</td>
+                <td>Saeed Abdul-Rauf's Weeding</td>
+                <td>02/05/2024</td>
+                <td>In-progress</td>
+                <td><a href="{% url 'event-detail' %}">View</a> | Share | Restart</td>
+            </tbody>
+        </table>
+    </section>
+{% endblock content %}
+    
+    

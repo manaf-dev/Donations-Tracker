@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block title %}Event Amount{% endblock title %}
+
+
+{% block content %}
+    {% include 'side-bar.html' %}
+    
+    <section>
+        <div class="amount-content">
+            <div class="text-detail">
+                <p class="title">Saeed Abdul-Rauf's Weeding</p>
+            </div>
+            <div class="card">
+                <div class="card-title">Total Amount Received</div>
+                <div class="card-text"><span>GH&#X20B5</span>500</div>
+            </div>
+        </div>
+        <div class="btn btn-secondary">
+            <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+        </div>
+    </section>
+{% endblock content %}
+    

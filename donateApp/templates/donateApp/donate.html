@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Donate{% endblock title %}
+
+
+{% block content %}
+    <section class="donate-section">
+        <div class="donate-top">
+            <figure>
+                <img src="{% static 'donateApp/imgs/flyer.jpg' %}" alt="Event flyer" class="flyer">
+            </figure>
+            <p class="event-desc">He is getting married next year, we're donating to support him.</p>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p class="form-title">Fill This Form To Donate</p>
+            <input type="text" name="name" id="name" placeholder="Enter name (optional)">
+            <input type="tel" name="phone" id="phone" placeholder="Enter mobile number">
+            <input type="number" name="amount" id="amount" placeholder="Enter amount">
+            <input type="submit" value="Donate" class="btn btn-primary">
+        </form>
+    </section>
+{% endblock content %}
+    
+    

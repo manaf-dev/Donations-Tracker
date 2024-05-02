@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Event Detail{% endblock title %}
+
+
+{% block content %}
+    {% include 'side-bar.html' %}
+    
+    <section>
+        <div class="detail-top">
+            <div class="text-detail">
+                <p class="title"><span>Title: </span>Saeed Abdul-Rauf's Weeding</p>
+                <p class="date">Created on 02/05/2024</p>
+                <p class="status"> Status: In-Progress</p>
+            </div>
+            <figcaption>
+                <img src="{% static 'donateApp/imgs/flyer.jpg' %}" alt="Event flyer" class="flyer">
+            </figcaption>
+        </div>
+        <div class="detail-bottom">
+            <div class="btn btn-primary">
+                <a href="{% url 'donate' %}">Donate</a>
+            </div>
+            <div class="detail-cards">
+                <div class="card">
+                    <div class="card-title">Total Amount Received</div>
+                    <div class="card-text"><span>GH&#X20B5</span>500</div>
+                    <div class="btn btn-primary">
+                        <a href="{% url 'amount' %}">View</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Number of Donors</div>
+                    <div class="card-text">5</div>
+                    <div class="btn btn-primary">
+                        <a href="#">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="btn btn-secondary">
+                <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+    
