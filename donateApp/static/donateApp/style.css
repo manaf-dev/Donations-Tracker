@@ -212,7 +212,7 @@ section .flyer {
 }
 
 .detail-cards .card {
-    width: 40%;
+    width: 400px;
 }
 
 .card .card-text span {
@@ -233,7 +233,8 @@ section .flyer {
 
 /* DONATE FORM STYLES */
 
-.donate-section {
+.donate-section, .create-section {
+    width: 45%;
     margin: auto;
 }
 
@@ -256,7 +257,7 @@ section .flyer {
     font-size: 14px;
 }
 
-.donate-section form {
+form {
     background-color: #fff;
     width: 90%;
     margin: 20px auto;
@@ -268,7 +269,7 @@ section .flyer {
     border-radius: 25px;
 }
 
-form input {
+form input, textarea {
     display: block;
     font-size: 15px;
     padding: 15px;
@@ -311,4 +312,19 @@ form .btn {
 .amount-content .card {
     margin-top: 20px;
     width: 300px;
+}
+
+
+/* CREATE EVENT STYLES */
+
+textarea {
+    height: 100px;
+}
+
+.create-section form {
+    margin-top: 60px;
+}
+
+.create-section form input, textarea {
+    border-radius: 15px;
 }

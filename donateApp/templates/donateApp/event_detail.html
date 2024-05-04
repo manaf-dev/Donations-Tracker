@@ -10,9 +10,15 @@
     <section>
         <div class="detail-top">
             <div class="text-detail">
-                <p class="title"><span>Title: </span>Saeed Abdul-Rauf's Weeding</p>
-                <p class="date">Created on 02/05/2024</p>
-                <p class="status"> Status: In-Progress</p>
+                <p class="title"><span>Title: </span>{{ event.title }}</p>
+                <p class="date">Created on {{ event.date_created | date:'d-M-Y' }}</p>
+                <p class="status"> 
+                    Status: 
+                    {% if event.is_completed == True %}
+                    Completed
+                    {% else %}
+                        In-Progress
+                    {% endif %}</p>
             </div>
             <figcaption>
                 <img src="{% static 'donateApp/imgs/flyer.jpg' %}" alt="Event flyer" class="flyer">
@@ -25,16 +31,16 @@
             <div class="detail-cards">
                 <div class="card">
                     <div class="card-title">Total Amount Received</div>
-                    <div class="card-text"><span>GH&#X20B5</span>500</div>
+                    <div class="card-text"><span>GH&#X20B5</span>{{ total_amount }}</div>
                     <div class="btn btn-primary">
-                        <a href="{% url 'amount' %}">View</a>
+                        <a href="{% url 'amount' pk=event.id %}">View</a>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-title">Number of Donors</div>
-                    <div class="card-text">5</div>
+                    <div class="card-text">{{ donors }}</div>
                     <div class="btn btn-primary">
-                        <a href="#">View</a>
+                        <a href="{% url 'donors' pk=event.id %}">View</a>
                     </div>
                 </div>
             </div>

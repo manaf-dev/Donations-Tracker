@@ -8,8 +8,9 @@ class Event(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=255)
     date_created = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateTimeField()
+    due_date = models.DateTimeField(blank=True, null=True)
     link = models.CharField(max_length=255)
+    is_completed = models.BooleanField()
 
 
     class Meta:
@@ -23,7 +24,6 @@ class Event(models.Model):
 class Donor(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     phone_num = models.CharField(max_length=15)
-    date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = 'Donors'
@@ -33,9 +33,10 @@ class Donor(models.Model):
 
 
 class Donation(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    donor = models.ForeignKey(Donor, null=True, on_delete=models.SET_NULL)
-    amount = models.CharField(max_length=10)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='donations')
+    donor = models.ForeignKey(Donor, null=True, on_delete=models.SET_NULL, related_name='event_donors')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = 'Donations'

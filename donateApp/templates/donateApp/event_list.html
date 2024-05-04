@@ -13,22 +13,32 @@
                 <a href="#">Create New Event</a>
             </div>
         </div>
+        
         <table class="events-table" border="1">
             <thead>
                 <th>S/N</th>
                 <th>Event Title</th>
                 <th>Date Created</th>
                 <th>Status</th>
-                <th>Action</th>
+                <thead>Action</th>
             </thead>
+            {% for event in events %}
             <tbody>
-                <td>1</td>
-                <td>Saeed Abdul-Rauf's Weeding</td>
-                <td>02/05/2024</td>
-                <td>In-progress</td>
-                <td><a href="{% url 'event-detail' %}">View</a> | Share | Restart</td>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ event.title }}</td>
+                <td>{{ event.date_created | date:'d-M-Y' }}</td>
+                <td>
+                    {% if event.is_completed == True %}
+                        Completed
+                    {% else %}
+                        In-Progress
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'event-detail' pk=event.id %}">View</a> | Share | Restart</td>
             </tbody>
+            {% endfor %}
         </table>
+            
     </section>
 {% endblock content %}
     
