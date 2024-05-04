@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Create Event{% endblock title %}
+
+
+{% block content %}
+    <section class="create-section">
+        <form action="" method="post">
+            {% csrf_token %}
+            <p class="form-title">Create an Event</p>
+            <input type="text" name="title" id="title" placeholder="Enter event title">
+            <textarea name="event-description" id="event-desc" cols="30" rows="10" placeholder="Describe your event"></textarea>
+            <input type="date" name="due-date" id="due-date" placeholder="Enter due date (if any)">
+            <input type="file" name="event-flyer" id="event-flyer">
+            <input type="submit" value="Create" class="btn btn-primary">
+        </form>
+    </section>
+{% endblock content %}
+    
+    

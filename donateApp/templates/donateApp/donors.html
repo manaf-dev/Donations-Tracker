@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Donors{% endblock title %}
+
+
+{% block content %}
+    {% include 'side-bar.html' %}
+
+    <section>
+        <h3>List of Donors For:</h3>
+        <h4>{{ event.title }}</h4>
+        
+        <table class="events-table" border="1">
+            <thead>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </thead>
+            {% for donation in donations %}
+            <tbody>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ donation.donor.name }}</td>
+                <td>{{ donation.donor.phone_num }}</td>
+                <td>{{ donation.amount }}</td>
+                <td>{{ donation.date | date:'d-m-Y' }}</td>
+            </tbody>
+            {% endfor %}
+        </table>
+            
+    </section>
+{% endblock content %}
+    
+    
