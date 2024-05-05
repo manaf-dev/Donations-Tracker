@@ -328,3 +328,33 @@ textarea {
 .create-section form input, textarea {
     border-radius: 15px;
 }
+
+
+/* LOGIN PAGE STYLES */
+
+.login-form {
+    width: fit-content;
+    padding: 35px;
+    border-radius: 15px;
+}
+
+.login-form fieldset {
+    padding: 20px ;
+}
+
+.login-form legend {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.login-form input {
+    margin-bottom: 20px;
+}
+
+
+.logout-form {
+    width: unset;
+    padding: 0;
+}
+

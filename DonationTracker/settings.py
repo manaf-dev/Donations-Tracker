@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     #custom apps
     'donateApp.apps.DonateappConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = 'login'

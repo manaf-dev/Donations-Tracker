@@ -10,14 +10,21 @@
             <figure>
                 <img src="{% static 'donateApp/imgs/flyer.jpg' %}" alt="Event flyer" class="flyer">
             </figure>
-            <p class="event-desc">He is getting married next year, we're donating to support him.</p>
+            <p class="event-desc">{{ event.description }}</p>
+            <p>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'amount' pk=event.id %}" class="btn btn-primary">View Amount</a>
+                    <a href="{% url 'donors' pk=event.id %}" class="btn btn-primary">View Donors</a>
+                {% endif %}
+                    
+            </p>
         </div>
-        <form action="" method="post">
+        <form action="{% url 'save-donate' pk=event.id %}" method="post">
             {% csrf_token %}
             <p class="form-title">Fill This Form To Donate</p>
             <input type="text" name="name" id="name" placeholder="Enter name (optional)">
-            <input type="tel" name="phone" id="phone" placeholder="Enter mobile number">
-            <input type="number" name="amount" id="amount" placeholder="Enter amount">
+            <input type="tel" name="phone" id="phone" placeholder="Enter mobile number" required>
+            <input type="number" name="amount" id="amount" placeholder="Enter amount" required>
             <input type="submit" value="Donate" class="btn btn-primary">
         </form>
     </section>

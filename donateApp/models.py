@@ -10,7 +10,8 @@ class Event(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     due_date = models.DateTimeField(blank=True, null=True)
     link = models.CharField(max_length=255)
-    is_completed = models.BooleanField()
+    is_completed = models.BooleanField(default=False)
+    # flyer = models.ImageField(upload_to='event_flyers', default='default.png', null=True, blank=True)
 
 
     class Meta:
@@ -34,7 +35,7 @@ class Donor(models.Model):
 
 class Donation(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='donations')
-    donor = models.ForeignKey(Donor, null=True, on_delete=models.SET_NULL, related_name='event_donors')
+    donor = models.ForeignKey(Donor, null=True, on_delete=models.SET_NULL)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateTimeField(auto_now_add=True)
 

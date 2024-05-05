@@ -8,6 +8,7 @@ urlpatterns = [
     path('event/<int:pk>/', views.eventDetail, name='event-detail'),
     path('event/<int:pk>/totalamount/', views.eventAmount, name='amount'),
     path('event/<int:pk>/donors/', views.eventDonors, name='donors'),
-    path('donate/', views.donate, name='donate'),
-    path('create-event/', views.create_event, name='create-event'),
+    path('donate/<int:pk>/', views.donate, name='donate'),
+    path('collect-donation/<int:pk>/', views.donateSave, name='save-donate'),
+    path('create-event/', views.createEvent, name='create-event'),
 ]

@@ -26,9 +26,16 @@
                 <td>{{ donation.donor.phone_num }}</td>
                 <td>{{ donation.amount }}</td>
                 <td>{{ donation.date | date:'d-m-Y' }}</td>
+            
+            {% empty %}
+                <td colspan="5">No donor to this event yet.</td>
             </tbody>
             {% endfor %}
         </table>
+
+        <div class="btn btn-secondary">
+            <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+        </div>
             
     </section>
 {% endblock content %}

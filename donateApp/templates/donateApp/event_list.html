@@ -10,7 +10,7 @@
     <section>
         <div class="events-btn">
             <div class="btn btn-primary">
-                <a href="#">Create New Event</a>
+                <a href="{% url 'create-event' %}">Create New Event</a>
             </div>
         </div>
         
@@ -20,7 +20,7 @@
                 <th>Event Title</th>
                 <th>Date Created</th>
                 <th>Status</th>
-                <thead>Action</th>
+                <th>Action</th>
             </thead>
             {% for event in events %}
             <tbody>
@@ -35,6 +35,8 @@
                     {% endif %}
                 </td>
                 <td><a href="{% url 'event-detail' pk=event.id %}">View</a> | Share | Restart</td>
+                {% empty %}
+                    <td colspan="5">You have not created any event yet.</td>
             </tbody>
             {% endfor %}
         </table>
