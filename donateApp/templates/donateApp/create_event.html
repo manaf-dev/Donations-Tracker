@@ -1,5 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block title %}Create Event{% endblock title %}
 
@@ -9,7 +11,7 @@
         <form action="" method="post">
             {% csrf_token %}
             <p class="form-title">Create an Event</p>
-            {{ form }}
+            {{ form | crispy }}
 
             <!-- <input type="text" name="title" id="title" placeholder="Enter event title" required>
             <textarea name="event-description" id="event-desc" cols="30" rows="10" placeholder="Describe your event" required></textarea>
