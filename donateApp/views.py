@@ -8,13 +8,18 @@ from django.db.models import Sum
 from .models import Event, Donor, Donation
 from .forms import CreateEventForm
 
+
 # Create your views here.
 @login_required
 def home(request):
     completed_events = Event.objects.filter(admin=request.user, is_completed=True).count()
     uncompleted_events = Event.objects.filter(admin=request.user, is_completed=False).count()
 
-    context = {'comp_events':completed_events, 'uncomp_events':uncompleted_events}
+    visit_count = request.session.get('visits', 0)
+    request.session['visits'] = visit_count + 1
+    visit_count = request.session['visits']
+
+    context = {'comp_events':completed_events, 'uncomp_events':uncompleted_events, 'visit_count':visit_count}
     return render(request, 'donateApp/index.html', context)
 
 
@@ -25,8 +30,8 @@ def eventsList(request):
     return render(request, 'donateApp/event_list.html', context)
 
 @login_required
-def eventDetail(request, pk):
-    event = Event.objects.get(id=pk)
+def eventDetail(request, slug):
+    event = Event.objects.get(slug=slug)
     donations = event.donations.all()
     total_amount = donations.aggregate(Sum('amount'))['amount__sum']
     if total_amount is None:
@@ -37,8 +42,8 @@ def eventDetail(request, pk):
 
 
 @login_required
-def eventAmount(request, pk):
-    event = Event.objects.get(id=pk)
+def eventAmount(request, slug):
+    event = Event.objects.get(slug=slug)
     donations = event.donations.filter(event=event)
     total_amount = donations.aggregate(Sum('amount'))['amount__sum']
     if total_amount is None:
@@ -48,28 +53,28 @@ def eventAmount(request, pk):
 
 
 @login_required
-def eventDonors(request, pk):
-    event = Event.objects.get(id=pk)
+def eventDonors(request, slug):
+    event = Event.objects.get(slug=slug)
     donations = event.donations.filter(event=event)
     context = {'event':event, 'donations':donations}
     return render(request, 'donateApp/donors.html', context)
 
 
-def donate(request, pk):
-    event = Event.objects.get(id=pk)
+def donate(request, slug):
+    event = Event.objects.get(slug=slug)
     context = {'event':event}
     return render(request, 'donateApp/donate.html', context)
 
 
-def donateSave(request, pk):
-    event = Event.objects.get(id=pk)
+def donateSave(request, slug):
+    event = Event.objects.get(id=slug)
     if request.method == 'POST':
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         amount = request.POST.get('amount')
         donor = Donor.objects.create(name=name, phone_num=phone)
         Donation.objects.create(event=event, donor=donor, amount=amount)
-        return redirect('donate', pk=event.id)
+        return redirect('donate', slug=event.slug)
     return redirect('donate', pk=event.id)
 
 
@@ -77,7 +82,7 @@ def donateSave(request, pk):
 def createEvent(request):
     form = CreateEventForm()
     if request.method == 'POST':
-        form = CreateEventForm(request.POST)
+        form = CreateEventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
             event.admin = request.user

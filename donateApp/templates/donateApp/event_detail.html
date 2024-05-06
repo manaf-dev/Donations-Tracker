@@ -26,21 +26,21 @@
         </div>
         <div class="detail-bottom">
             <div class="btn btn-primary">
-                <a href="{% url 'donate' pk=event.id %}">Donate</a>
+                <a href="{% url 'donate' slug=event.slug %}">Donate</a>
             </div>
             <div class="detail-cards">
                 <div class="card">
                     <div class="card-title">Total Amount Received</div>
                     <div class="card-text"><span>GH&#X20B5</span>{{ total_amount }}</div>
                     <div class="btn btn-primary">
-                        <a href="{% url 'amount' pk=event.id %}">View</a>
+                        <a href="{% url 'amount' slug=event.slug %}">View</a>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-title">Number of Donors</div>
                     <div class="card-text">{{ donors }}</div>
                     <div class="btn btn-primary">
-                        <a href="{% url 'donors' pk=event.id %}">View</a>
+                        <a href="{% url 'donors' slug=event.slug %}">View</a>
                     </div>
                 </div>
             </div>

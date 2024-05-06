@@ -13,8 +13,8 @@
             <p class="event-desc">{{ event.description }}</p>
             <p>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'amount' pk=event.id %}" class="btn btn-primary">View Amount</a>
-                    <a href="{% url 'donors' pk=event.id %}" class="btn btn-primary">View Donors</a>
+                    <a href="{% url 'amount' slug=event.slug %}" class="btn btn-primary">View Amount</a>
+                    <a href="{% url 'donors' slug=event.slug %}" class="btn btn-primary">View Donors</a>
                 {% endif %}
                     
             </p>

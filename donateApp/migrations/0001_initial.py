@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(max_length=255)),
                 ('date_created', models.DateTimeField(auto_now_add=True)),
                 ('due_date', models.DateTimeField(blank=True, null=True)),
-                ('link', models.CharField(max_length=255)),
+                ('slug', models.CharField(max_length=50, unique=True, null=False)),
                 ('is_completed', models.BooleanField()),
                 ('admin', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
             name='Donation',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.CharField(max_length=10)),
+                ('amount', models.DecimalField(max_digits=10, decimal_places=2)),
                 ('date', models.DateTimeField(auto_now_add=True)),
                 ('donor', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='donateApp.donor')),
                 ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='donateApp.event')),

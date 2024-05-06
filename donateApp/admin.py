@@ -6,6 +6,10 @@ from .models import Donation
 
 
 # Register your models here.
-admin.site.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('title',)}
+
+
+admin.site.register(Event, EventAdmin)
 admin.site.register(Donor)
 admin.site.register(Donation)

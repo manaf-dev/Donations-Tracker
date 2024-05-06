@@ -34,7 +34,7 @@
                         In-Progress
                     {% endif %}
                 </td>
-                <td><a href="{% url 'event-detail' pk=event.id %}">View</a> | Share | Restart</td>
+                <td><a href="{% url 'event-detail' slug=event.slug %}">View</a> | Share | Restart</td>
                 {% empty %}
                     <td colspan="5">You have not created any event yet.</td>
             </tbody>
