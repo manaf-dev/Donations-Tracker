@@ -13,7 +13,7 @@
 
 
 <section>
-    <p>You have visited this page {{ visit_count }} time{{ visit_count|pluralize }} </p>
+    
     <div class="home-btns">
         <div class="btn btn-primary">
             <a href="{% url 'create-event' %}">Create New Event</a>
@@ -22,7 +22,7 @@
             <a href="#">Buy SMS</a>
         </div>
     </div>
-    <div class="home-content">
+    <div class="home-cards">
             <div class="card">
                 <div class="card-title">Completed Events</div>
                 <div class="card-text">{{ comp_events }}</div>

@@ -5,14 +5,16 @@
 
 
 {% block content %}
-    <form action="" method="post" class="login-form">
-        {% csrf_token %}
-        <fieldset>
-            <legend>Login</legend>
-            {{form}}
-            <input type="submit" value="Login" class="btn btn-primary">
-        </fieldset>
-    </form>
+    <section class="login-section">
+        <form action="" method="post" class="login-form">
+            {% csrf_token %}
+            <fieldset>
+                <legend>Login</legend>
+                {{form}}
+                <input type="submit" value="Login" class="btn btn-primary">
+            </fieldset>
+        </form>
+    </section>
 {% endblock content %}
     
     

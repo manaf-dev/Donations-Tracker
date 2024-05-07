@@ -9,18 +9,18 @@ body {
     background-color: #D3D9D4;
 }
 
+/* TOP BAR STYLES */
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 75px;
     padding: 10px 80px;
     background-color: #748D92;
     color: #fff;
     width: 100%;
-    position: sticky;
+    position: fixed;
     top: 0;
-    left: 0;
-    overflow: hidden;
     z-index: 999;
 }
 
@@ -40,12 +40,29 @@ header .title {
 header .username {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 50px;
 }
 
-header .username p {
-    font-size: 18px;
+header .username p span{
+    font-size: 20px;
+    font-weight: 500;
 }
+
+header .logout-btn {
+    font-size: 16px;
+    border-radius: 20px;
+    color: #fff;
+    background-color: #124E66;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+header .logout-btn:hover, .logout-btn:active {
+    background-color: #124e66c5;
+}
+
+/* SIDE BAR STYLES */
 
 a {
     color: #fff;
@@ -56,13 +73,7 @@ li {
     list-style: none;
 }
 
-main {
-    display: flex;
-    display: -webkit-flex;
-}
-
 aside {
-    /* flex: 1; */
     position: fixed;
     background-color: #124E66;
     top: 0;
@@ -70,7 +81,7 @@ aside {
     width: 250px;
     height: 100vh;
     color: #fff;
-    /* padding: 50px 30px 50px 50px; */
+    overflow-x: hidden;
 }
 
 aside nav {
@@ -84,24 +95,24 @@ aside li a {
     display: block;
 }
 
-aside li a:hover, aside li a:active, aside li a:focus {
+aside li a:hover, aside li a:active, .focus {
     color: #124E66;
     background-color: #D3D9D4;
 }
 
 section {
-    /* flex: 4; */
-    margin: 60px 50px 10px 300px;
+    margin: 75px 50px 10px 250px;
+    padding: 50px;
 }
 
 
 /* HOME SECTION STYLES */
 
-.home-btns, .events-btn {
+.home-btns, .events-btn, .details-btn {
     display: flex;
     align-items: center;
-    gap: 100px;
-    margin-bottom: 30px;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .btn {
@@ -132,49 +143,70 @@ section {
 
 .btn-secondary:hover {
     background-color: #c8cdc9;
-    
 }
 
 
-.home-content {
-    /* width: 100%; */
-    margin: auto;
-    margin-left: 80px;
+.home-cards {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 300px);
-    column-gap: 40px;
-    row-gap: 20px;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+    column-gap: 100px;
+    row-gap: 30px;
 }
 
-.card{
+.home-cards .card, .detail-cards .card, .amount-content .card{
     background-color: #fff;
     padding: 20px;
-    border-radius: 30px;
+    border-radius: 15px;
+    min-width: max-content;
 }
 
-.card-title {
+.home-cards .card-title, .detail-cards .card-title, .amount-content .card-title {
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     color: #979696;
 }
 
-.card-text {
+.home-cards .card-text, .detail-cards .card-text, .amount-content .card-text {
     font-size: 4rem;
     font-weight: 500;
-    width: fit-content;
-    margin: auto;
+    text-align: center;
 }
 
 
 /* EVENT SECTION STYLES */
+section h1 {
+    text-align: center;
+    font-size: 2rem;
+    padding-bottom: 10px;
+    color: #124E66;
+}
 
 .events-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 18px;
+    text-align: center;
 }
 
 th, td {
-    padding: 10px 20px;
+    padding: 10px;
+}
+
+.events-table .view-btn {
+    font-size: 14px;
+    font-weight: 500;
+    color: #124E66;
+    background-color: none;
+    padding: 3px 13px;
+    border: 1px solid #124E66;
+    border-radius: 20px;
+}
+
+.view-btn:hover, .view-btn:active {
+    background-color: #124e66c5;
+    color: #fff;
 }
 
 
@@ -183,12 +215,14 @@ th, td {
 section .detail-top {
     display: flex;
     align-items: center;
-    gap: 80px;
+    justify-content: space-around;
+    gap: 100px;
 }
 
 .text-detail .title {
     font-size: 2rem;
 }
+
 .text-detail .title span {
     font-weight: 600;
 }
@@ -207,15 +241,16 @@ section .flyer {
 
 .detail-bottom .detail-cards {
     display: flex;
+    justify-content: space-around;
     gap: 50px;
     margin-top: 20px;
 }
 
 .detail-cards .card {
-    width: 400px;
+    width: 40%;
 }
 
-.card .card-text span {
+.detail-cards .card-text span, .amount-content .card-text span {
     font-weight: 400;
     font-size: 20px;
     opacity: 0.7;
@@ -226,41 +261,60 @@ section .flyer {
     padding: 3px 20px;
 }
 
-.detail-bottom .btn-secondary {
+.back-btn {
     margin-top: 30px;
 }
 
 
 /* DONATE FORM STYLES */
-
 .donate-section, .create-section {
-    width: 45%;
-    margin: auto;
+    padding-top: 18px;
+    padding-bottom: 0;
+    margin: 75px 0 0 0;
 }
 
-.donate-section .donate-top {
+.donate-section .back-btn {
+    margin-top: 5px;
+}
+
+.donate-top {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
 }
 
-.donate-section img {
+.donate-top img {
     width: 150px;
     height: 150px;
 }
 
-.donate-section .donate-top .event-desc {
+.donate-top .event-desc {
     text-align: center;
     width: 80%;
     font-style: italic;
     font-size: 14px;
+    margin-bottom: 15px;
 }
 
-form {
+.donate-top .donate-form-btns {
+    display: flex;
+    gap: 100px;
+    justify-content: space-between;
+}
+
+.donate-top .donate-form-btns .btn {
+    padding: 3px 10px;
+}
+
+.donate-form-btns .btn-secondary {
+    color: #124E66;
+}
+
+.donate-section form, .create-section form {
     background-color: #fff;
-    width: 90%;
-    margin: 20px auto;
+    width: 30%;
+    min-width: max-content;
+    margin: 10px auto;
     padding: 15px;
     display: flex;
     align-items: center;
@@ -269,14 +323,15 @@ form {
     border-radius: 25px;
 }
 
-form input, textarea {
+.donate-section form input, .donate-section form textarea, .create-section form input, .create-section form textarea {
     display: block;
     font-size: 15px;
     padding: 15px;
     width: 90%;
     height: 43px;
-    border-radius: 30px;
+    border-radius: 10px;
     border: 1px solid gray;
+    text-align: center;
 }
 
 form input:active, form input:focus {
@@ -290,52 +345,60 @@ form .form-title {
     margin-bottom: 10px;
 }
 
-form .btn {
-    padding: 5px 20px;
-}
 
 
 /* AMOUNT PAGE STYLES */
 
 .amount-content {
-    margin: inherit;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.amount-content .title {
-    font-weight: 600;
-}
-
 .amount-content .card {
     margin-top: 20px;
-    width: 300px;
+    width: 40%;
+    height: max-content;
 }
 
 
 /* CREATE EVENT STYLES */
 
-textarea {
+.create-section form {
+    margin-top: 40px;
+}
+
+.create-section .form-title {
+    font-size: 25px;
+}
+
+.create-section form textarea {
     height: 100px;
 }
 
-.create-section form {
-    margin-top: 60px;
+.create-section form .btn {
+    padding: unset;
+    font-size: 20px;
 }
 
-.create-section form input, textarea {
-    border-radius: 15px;
+.create-section .img-input {
+    height: fit-content;
 }
 
 
 /* LOGIN PAGE STYLES */
+.login-section, .logout-section {
+    margin: 75px 0 0 0;
+}
+
 
 .login-form {
+    margin: auto;
     width: fit-content;
     padding: 35px;
     border-radius: 15px;
+    font-size: 20px;
 }
 
 .login-form fieldset {
@@ -343,7 +406,7 @@ textarea {
 }
 
 .login-form legend {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 600;
     padding: 10px;
 }
@@ -353,8 +416,11 @@ textarea {
 }
 
 
-.logout-form {
-    width: unset;
-    padding: 0;
+.logout-section p {
+    font-size: 25px;
 }
 
+.logout-section p a {
+    color: #124E66;
+    font-size: 20px;
+}

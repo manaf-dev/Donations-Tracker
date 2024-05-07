@@ -13,7 +13,7 @@
                 <a href="{% url 'create-event' %}">Create New Event</a>
             </div>
         </div>
-        
+        <h1 class="events-title">Your List of Events</h1>
         <table class="events-table" border="1">
             <thead>
                 <th>S/N</th>
@@ -34,12 +34,16 @@
                         In-Progress
                     {% endif %}
                 </td>
-                <td><a href="{% url 'event-detail' slug=event.slug %}">View</a> | Share | Restart</td>
+                <td><a href="{% url 'event-detail' slug=event.slug %}" class="view-btn">View</a></td>
                 {% empty %}
-                    <td colspan="5">You have not created any event yet.</td>
+                    <td colspan="5"><em>You have not created any event yet.</em></td>
             </tbody>
             {% endfor %}
         </table>
+
+        <div class="btn btn-secondary back-btn">
+            <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+        </div>
             
     </section>
 {% endblock content %}

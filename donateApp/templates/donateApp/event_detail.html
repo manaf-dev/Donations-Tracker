@@ -20,13 +20,13 @@
                         In-Progress
                     {% endif %}</p>
             </div>
-            <figcaption>
+            <figure>
                 <img src="{{ event.flyer.url }}" alt="Event flyer" class="flyer">
-            </figcaption>
+            </figure>
         </div>
         <div class="detail-bottom">
-            <div class="btn btn-primary">
-                <a href="{% url 'donate' slug=event.slug %}">Donate</a>
+            <div class="details-btn">
+                <a href="{% url 'donate' slug=event.slug %}" class="btn btn-primary">Donate</a>
             </div>
             <div class="detail-cards">
                 <div class="card">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="btn btn-secondary">
+            <div class="btn btn-secondary back-btn">
                 <a href="{{ request.META.HTTP_REFERER }}">Back</a>
             </div>
         </div>

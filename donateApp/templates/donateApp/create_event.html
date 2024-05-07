@@ -11,14 +11,18 @@
         <form action="" method="post">
             {% csrf_token %}
             <p class="form-title">Create an Event</p>
-            {{ form | crispy }}
+            {% comment %} {{ form|crispy }} {% endcomment %}
 
-            <!-- <input type="text" name="title" id="title" placeholder="Enter event title" required>
+            <input type="text" name="title" id="title" placeholder="Enter event title" required>
             <textarea name="event-description" id="event-desc" cols="30" rows="10" placeholder="Describe your event" required></textarea>
             <input type="date" name="due-date" id="due-date" placeholder="Enter due date (if any)">
-            <input type="file" name="event-flyer" id="event-flyer"> -->
+            <input type="file" name="event-flyer" id="event-flyer" class="img-input">
             <input type="submit" value="Create" class="btn btn-primary">
         </form>
+            
+        <div class="btn btn-secondary back-btn">
+            <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+        </div>
     </section>
 {% endblock content %}
     

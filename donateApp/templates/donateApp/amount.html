@@ -9,14 +9,14 @@
     <section>
         <div class="amount-content">
             <div class="text-detail">
-                <p class="title">{{ event.title }}</p>
+                <h1 class="title">{{ event.title }}</h1>
             </div>
             <div class="card">
                 <div class="card-title">Total Amount Received</div>
                 <div class="card-text"><span>GH&#X20B5</span>{{ total_amount }}</div>
             </div>
         </div>
-        <div class="btn btn-secondary">
+        <div class="btn btn-secondary back-btn">
             <a href="{{ request.META.HTTP_REFERER }}">Back</a>
         </div>
     </section>

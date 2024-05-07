@@ -78,7 +78,7 @@ def donateSave(request, slug):
     return redirect('donate', pk=event.id)
 
 
-
+@login_required
 def createEvent(request):
     form = CreateEventForm()
     if request.method == 'POST':
