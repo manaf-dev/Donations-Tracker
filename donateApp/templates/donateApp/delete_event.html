@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Delete-event{% endblock title %}
+
+
+{% block content %}
+    <section>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to delete event: {{ event.title }}</p>
+            <input type="submit" value="Delete" class="btn btn-primary">
+        </form>
+    </section>
+{% endblock content %}
+    
+    

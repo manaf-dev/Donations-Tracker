@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+
+{% block title %}Event-state{% endblock title %}
+
+
+{% block content %}
+    <section>
+        <form action="" method="post">
+            {% csrf_token %}
+            
+            {% if event.is_completed == True %}
+                <p>Are you sure you want to Restart event: {{ event.title }}</p>
+            {% else %}
+                <p>Are you sure you want to end event: {{ event.title }}</p>
+            {% endif %}
+            <input type="submit" value="Confirm" class="btn btn-primary">
+        </form>
+    </section>
+{% endblock content %}
+    
+    

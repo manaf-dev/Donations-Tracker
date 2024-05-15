@@ -11,6 +11,10 @@
                 <a href="{{ request.META.HTTP_REFERER }}">Back</a>
             </div>
         {% endif %}
+
+        
+        {% if event.is_completed == False %}
+            
         <div class="donate-top">
             <figure>
                 <img src="{{ event.flyer.url }}" alt="Event flyer" class="flyer">
@@ -24,7 +28,7 @@
                     
             </div>
         </div>
-        <form action="{% url 'save-donate' pk=event.id %}" method="post">
+        <form action="{% url 'save-donate' slug=event.slug %}" method="post">
             {% csrf_token %}
             <p class="form-title">Fill This Form To Donate</p>
             <input type="text" name="name" id="name" placeholder="Enter name (optional)">
@@ -32,6 +36,11 @@
             <input type="number" name="amount" id="amount" placeholder="Enter amount" required>
             <button type="submit" class="btn btn-primary">Donate</button>
         </form>
+
+        {% else %}
+            <p>Sorry! This event has ended you cannot donate.</p>
+        
+        {% endif %}
             
     </section>
 {% endblock content %}

@@ -34,7 +34,16 @@
                         In-Progress
                     {% endif %}
                 </td>
-                <td><a href="{% url 'event-detail' slug=event.slug %}" class="view-btn">View</a></td>
+                <td>
+                    <a href="{% url 'event-detail' slug=event.slug %}" class="view-btn">View</a>
+                    <a href="{% url 'delete-event' slug=event.slug %}" class="view-btn">Delete</a>
+                    
+                    {% if event.is_completed == True %}
+                        <a href="{% url 'event-state' slug=event.slug %}" class="view-btn">Restart</a>
+                    {% else %}
+                        <a href="{% url 'event-state' slug=event.slug %}" class="view-btn">End</a>
+                    {% endif %}
+                </td>
                 {% empty %}
                     <td colspan="5"><em>You have not created any event yet.</em></td>
             </tbody>

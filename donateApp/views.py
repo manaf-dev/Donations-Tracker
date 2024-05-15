@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
@@ -7,6 +7,7 @@ from django.db.models import Sum
 
 from .models import Event, Donor, Donation
 from .forms import CreateEventForm
+from .utils import send_sms
 
 
 # Create your views here.
@@ -23,22 +24,49 @@ def home(request):
     return render(request, 'donateApp/index.html', context)
 
 
-@login_required
-def eventsList(request):
-    events = Event.objects.filter(admin=request.user)
-    context = {'events':events}
-    return render(request, 'donateApp/event_list.html', context)
+# @login_required
+# def eventsList(request):
+#     events = Event.objects.filter(admin=request.user)
+#     context = {'events':events}
+#     return render(request, 'donateApp/event_list.html', context)
+#class-based view
+class EventList(LoginRequiredMixin, ListView):
+    context_object_name = 'events'
+    template_name='donateApp/event_list.html'
+    # login_url = '/'
+    def get_queryset(self):
+        return Event.objects.filter(admin=self.request.user)
 
-@login_required
-def eventDetail(request, slug):
-    event = Event.objects.get(slug=slug)
-    donations = event.donations.all()
-    total_amount = donations.aggregate(Sum('amount'))['amount__sum']
-    if total_amount is None:
-        total_amount = '0.00'
-    donors = donations.values('donor').distinct().count()
-    context = {'event':event, 'total_amount':total_amount, 'donors':donors}
-    return render(request, 'donateApp/event_detail.html', context)
+
+
+# @login_required
+# def eventDetail(request, slug):
+#     event = Event.objects.get(slug=slug)
+#     donations = event.donations.all()
+#     total_amount = donations.aggregate(Sum('amount'))['amount__sum']
+#     if total_amount is None:
+#         total_amount = '0.00'
+#     donors = donations.values('donor').distinct().count()
+#     context = {'event':event, 'total_amount':total_amount, 'donors':donors}
+#     return render(request, 'donateApp/event_detail.html', context)
+#class-based view
+class EventDetail(LoginRequiredMixin, DetailView):
+    model = Event
+    template_name='donateApp/event_detail.html'
+    context_object_name = 'event'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.object
+        donations = event.donations.all()
+        total_amount = donations.aggregate(Sum('amount'))['amount__sum']
+        if total_amount is None:
+            total_amount = '0.00'
+        donors = donations.values('donor').distinct().count()
+        context['donors'] = donors
+        context['total_amount'] = total_amount
+        return context
+
 
 
 @login_required
@@ -67,41 +95,65 @@ def donate(request, slug):
 
 
 def donateSave(request, slug):
-    event = Event.objects.get(id=slug)
+    event = Event.objects.get(slug=slug)
     if request.method == 'POST':
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         amount = request.POST.get('amount')
         donor = Donor.objects.create(name=name, phone_num=phone)
         Donation.objects.create(event=event, donor=donor, amount=amount)
+        # send_sms('+233540634141', 'Thank you for your donation.')
         return redirect('donate', slug=event.slug)
-    return redirect('donate', pk=event.id)
+    return redirect('donate', slug=event.slug)
 
 
 @login_required
 def createEvent(request):
-    form = CreateEventForm()
+    # form = CreateEventForm()
     if request.method == 'POST':
-        form = CreateEventForm(request.POST, request.FILES)
-        if form.is_valid():
-            event = form.save(commit=False)
-            event.admin = request.user
-            event.save()
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        due_date = request.POST.get('due-date')
+        flyer = request.FILES.get('flyer')
+
+        if title and description:
+            event = Event.objects.create(
+                admin=request.user,
+                title=title,
+                description = description,
+                due_date = due_date,
+                flyer = flyer
+            )
+        else:
+            return redirect('create-event')
+            
             return redirect('events')
-    context = {'form': form}
-    return render(request, 'donateApp/create_event.html', context)
+    return render(request, 'donateApp/create_event.html')
 
 
-# class EventList(LoginRequiredMixin, ListView):
-#     model = Event
-#     context_object_name = 'events'
-#     template_name='event_list.html'
-#     login_url = '/'
+@login_required
+def deleteEvent(request, slug):
+    event = Event.objects.get(slug=slug)
+    if request.method == 'POST':
+        event.delete()
+        return redirect('events')
+    context = {'event':event}
+    return render(request, 'donateApp/delete_event.html', context)
 
 
-# class EventDetail(LoginRequiredMixin, DetailView):
-#     model = Event
-#     template_name='donateApp/event_detail.html'
-#     context_object_name = 'event'
-#     login_url = '/'
+@login_required
+def eventState(request, slug):
+    event = Event.objects.get(slug=slug)
+    if request.method == 'POST':
+        if event.is_completed == True:
+            event.is_completed = False
+        else:
+            event.is_completed = True
+        event.save()
+        return redirect('events')
+    context = {'event':event}
+    return render(request, 'donateApp/event_state.html', context)
+
+
+
 

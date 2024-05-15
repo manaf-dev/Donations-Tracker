@@ -7,22 +7,21 @@
 
 
 {% block content %}
-    <section class="create-section">
-        <form action="" method="post">
+<section class="create-section">
+        <div class="btn btn-secondary back-btn">
+            <a href="{% url 'events' %}">Back</a>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p class="form-title">Create an Event</p>
-            {% comment %} {{ form|crispy }} {% endcomment %}
-
             <input type="text" name="title" id="title" placeholder="Enter event title" required>
-            <textarea name="event-description" id="event-desc" cols="30" rows="10" placeholder="Describe your event" required></textarea>
-            <input type="date" name="due-date" id="due-date" placeholder="Enter due date (if any)">
-            <input type="file" name="event-flyer" id="event-flyer" class="img-input">
-            <input type="submit" value="Create" class="btn btn-primary">
+            <textarea name="description" id="description" placeholder="Describe your event" required></textarea>
+            <input type="date" name="due-date" id="due-date" placeholder="Due date (if any)">
+            <input type="file" name="flyer" id="flyer" placeholder="Upload event flyer">
+            <input type="submit" value="Create" class="btn btn-primary"> 
         </form>
+        <!-- {{ form }} -->
             
-        <div class="btn btn-secondary back-btn">
-            <a href="{{ request.META.HTTP_REFERER }}">Back</a>
-        </div>
     </section>
 {% endblock content %}
     

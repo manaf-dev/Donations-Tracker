@@ -12,6 +12,15 @@
             <div class="text-detail">
                 <p class="title"><span>Title: </span>{{ event.title }}</p>
                 <p class="date">Created on {{ event.date_created | date:'d-M-Y' }}</p>
+                <p class="date">
+                    Due Date: 
+                    {% if event.due_date %}
+                    {{ event.due_date | date:'d-M-Y' }}
+                    {% else %}
+                    N/A
+                    {% endif %}
+                        
+                </p>
                 <p class="status"> 
                     Status: 
                     {% if event.is_completed == True %}

@@ -30,6 +30,7 @@ class Event(models.Model):
     class Meta:
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
+        ordering = ['is_completed', '-date_created']
 
     def __str__(self):
         return self.title
