@@ -3,6 +3,9 @@
 
 {% block title %}Event Detail{% endblock title %}
 
+{% block page-title %}
+    <p>Admin Page</p>
+{% endblock page-title %}
 
 {% block content %}
     {% include 'side-bar.html' %}
@@ -11,15 +14,15 @@
         <div class="detail-top">
             <div class="text-detail">
                 <p class="title"><span>Title: </span>{{ event.title }}</p>
-                <p class="date">Created on {{ event.date_created | date:'d-M-Y' }}</p>
-                <p class="date">
-                    Due Date: 
+                <p class="date">Created: <em>{{ event.date_created | date:'d-M-Y' }}</em></p>
+                <p class="date">Due Date:
+                    <em> 
                     {% if event.due_date %}
-                    {{ event.due_date | date:'d-M-Y' }}
+                        {{ event.due_date | date:'d-M-Y' }}
                     {% else %}
-                    N/A
-                    {% endif %}
-                        
+                        N/A
+                    {% endif %} 
+                    </em>  
                 </p>
                 <p class="status"> 
                     Status: 
@@ -28,6 +31,7 @@
                     {% else %}
                         In-Progress
                     {% endif %}</p>
+                    <a href="{% url 'update-event' event.slug %}">Edit Event Details</a>
             </div>
             <figure>
                 <img src="{{ event.flyer.url }}" alt="Event flyer" class="flyer">

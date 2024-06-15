@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}Login{% endblock title %}
+{% block title %}Sign up{% endblock title %}
 
 
 {% block content %}
@@ -10,10 +10,10 @@
         <form action="" method="post" class="login-form">
             {% csrf_token %}
             <fieldset>
-                <legend>Login</legend>
+                <legend>Sign Up</legend>
                 {{ form|crispy }}
-                <input type="submit" value="Login" class="btn btn-primary">
-                <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+                <input type="submit" value="Sign up" class="btn btn-primary">
+                <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
             </fieldset>
         </form>
     </section>

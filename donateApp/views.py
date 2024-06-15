@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
+from django.utils import timezone
 
 from .models import Event, Donor, Donation
 from .forms import CreateEventForm
@@ -11,6 +12,12 @@ from .utils import send_sms
 
 
 # Create your views here.
+
+class IndexView(TemplateView):
+    template_name = 'donateApp/index.html'
+
+
+
 @login_required
 def home(request):
     completed_events = Event.objects.filter(admin=request.user, is_completed=True).count()
@@ -21,7 +28,7 @@ def home(request):
     visit_count = request.session['visits']
 
     context = {'comp_events':completed_events, 'uncomp_events':uncompleted_events, 'visit_count':visit_count}
-    return render(request, 'donateApp/index.html', context)
+    return render(request, 'donateApp/home.html', context)
 
 
 # @login_required
@@ -90,6 +97,9 @@ def eventDonors(request, slug):
 
 def donate(request, slug):
     event = Event.objects.get(slug=slug)
+    # if event.due_date & event.due_date >= timezone.now().date():
+    #     event.is_completed = True
+    #     event.save()
     context = {'event':event}
     return render(request, 'donateApp/donate.html', context)
 
@@ -101,34 +111,44 @@ def donateSave(request, slug):
         phone = request.POST.get('phone')
         amount = request.POST.get('amount')
         donor = Donor.objects.create(name=name, phone_num=phone)
-        Donation.objects.create(event=event, donor=donor, amount=amount)
-        # send_sms('+233540634141', 'Thank you for your donation.')
+        Donation.objects.create(
+            event=event, 
+            donor=donor, 
+            amount=amount
+        )
+        msg = event.thank_you_msg
+        send_sms(phone, f'Hello {name},\n{msg}')
         return redirect('donate', slug=event.slug)
     return redirect('donate', slug=event.slug)
 
 
 @login_required
 def createEvent(request):
-    # form = CreateEventForm()
+    form = CreateEventForm()
     if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        due_date = request.POST.get('due-date')
-        flyer = request.FILES.get('flyer')
-
-        if title and description:
-            event = Event.objects.create(
-                admin=request.user,
-                title=title,
-                description = description,
-                due_date = due_date,
-                flyer = flyer
-            )
-        else:
-            return redirect('create-event')
-            
+        form = CreateEventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.admin = request.user
+            event.save()
             return redirect('events')
-    return render(request, 'donateApp/create_event.html')
+    context = {'form': form}
+    return render(request, 'donateApp/create_event.html', context)
+
+
+@login_required
+def updateEvent(request, slug):
+    event = Event.objects.get(slug=slug)
+    form = CreateEventForm(instance=event)
+    if request.method == 'POST':
+        form = CreateEventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.admin = request.user
+            event.save()
+            return redirect('event-detail', slug=slug)
+    context = {'form': form}
+    return render(request, 'donateApp/create_event.html', context)
 
 
 @login_required

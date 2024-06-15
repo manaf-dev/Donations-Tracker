@@ -1,14 +1,17 @@
 {% extends 'main.html' %}
-{% load static %}
+{% load static %} {% load crispy_forms_tags %}
 
 {% block title %}Donate{% endblock title %}
 
+{% block page-title %}
+    <p>Donation Page</p>
+{% endblock page-title %}
 
 {% block content %}
     <section class="donate-section">
         {% if user.is_authenticated %}
             <div class="btn btn-secondary back-btn">
-                <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+                <a href="{% url 'event-detail' event.slug %}">Back</a>
             </div>
         {% endif %}
 
@@ -34,7 +37,7 @@
             <input type="text" name="name" id="name" placeholder="Enter name (optional)">
             <input type="tel" name="phone" id="phone" placeholder="Enter mobile number" required>
             <input type="number" name="amount" id="amount" placeholder="Enter amount" required>
-            <button type="submit" class="btn btn-primary">Donate</button>
+            <button type="submit" class="btn btn-primary" id='donate-btn'>Donate</button>
         </form>
 
         {% else %}

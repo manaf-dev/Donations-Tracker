@@ -5,6 +5,9 @@
 
 {% block title %}Create Event{% endblock title %}
 
+{% block page-title %}
+    <p>Admin Page</p>
+{% endblock page-title %}
 
 {% block content %}
 <section class="create-section">
@@ -13,14 +16,16 @@
         </div>
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <p class="form-title">Create an Event</p>
+            <!-- <p class="form-title">Create an Event</p>
             <input type="text" name="title" id="title" placeholder="Enter event title" required>
             <textarea name="description" id="description" placeholder="Describe your event" required></textarea>
-            <input type="date" name="due-date" id="due-date" placeholder="Due date (if any)">
-            <input type="file" name="flyer" id="flyer" placeholder="Upload event flyer">
-            <input type="submit" value="Create" class="btn btn-primary"> 
+            <label for="due-date">Due date (if any)</label>
+            <input type="date" name="due-date" id="due-date">
+            <p for="flyer">Event flyer</p>
+            <input type="file" name="flyer" id="flyer"> -->
+            {{ form|crispy }}
+            <input type="submit" value="Create" class="btn btn-primary">
         </form>
-        <!-- {{ form }} -->
             
     </section>
 {% endblock content %}

@@ -2,11 +2,15 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'poppins', sans-serif;
 }
 
 body {
+    font-family: 'poppins', sans-serif;
     background-color: #D3D9D4;
+}
+
+p, figure {
+    margin: 0;
 }
 
 /* TOP BAR STYLES */
@@ -40,7 +44,7 @@ header .title {
 header .username {
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
 }
 
 header .username p span{
@@ -54,7 +58,7 @@ header .logout-btn {
     color: #fff;
     background-color: #124E66;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 15px;
     cursor: pointer;
 }
 
@@ -65,7 +69,7 @@ header .logout-btn:hover, .logout-btn:active {
 /* SIDE BAR STYLES */
 
 a {
-    color: #fff;
+    color: inherit;
     text-decoration: none;
 }
 
@@ -138,6 +142,7 @@ section {
     border: 1px solid #124E66;
 }
 .btn-secondary a {
+    display: block;
     color: #124E66;
 }
 
@@ -187,7 +192,7 @@ section h1 {
     width: 100%;
     border-collapse: collapse;
     font-size: 18px;
-    text-align: center;
+    text-align: justify;
 }
 
 th, td {
@@ -228,8 +233,7 @@ section .detail-top {
 }
 
 .detail-top .date, .detail-top .status {
-    font-style: italic;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 section .flyer {
@@ -268,7 +272,7 @@ section .flyer {
 
 /* DONATE FORM STYLES */
 .donate-section, .create-section {
-    padding-top: 18px;
+    padding-top: 5px;
     padding-bottom: 0;
     margin: 75px 0 0 0;
 }
@@ -284,8 +288,8 @@ section .flyer {
 }
 
 .donate-top img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 }
 
 .donate-top .event-desc {
@@ -312,22 +316,18 @@ section .flyer {
 
 .donate-section form, .create-section form {
     background-color: #fff;
-    width: 30%;
-    min-width: max-content;
+    width: 40%;
     margin: 10px auto;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 15px;
+    padding: 30px 50px;
     border-radius: 25px;
 }
 
-.donate-section form input, .donate-section form textarea, .create-section form input, .create-section form textarea {
+.donate-section form input{
     display: block;
     font-size: 15px;
     padding: 15px;
-    width: 90%;
+    margin-bottom: 10px;
+    width: 100%;
     height: 43px;
     border-radius: 10px;
     border: 1px solid gray;
@@ -343,6 +343,7 @@ form .form-title {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 
@@ -365,26 +366,18 @@ form .form-title {
 
 /* CREATE EVENT STYLES */
 
-.create-section form {
-    margin-top: 40px;
-}
-
-.create-section .form-title {
-    font-size: 25px;
-}
-
 .create-section form textarea {
     height: 100px;
 }
 
 .create-section form .btn {
-    padding: unset;
-    font-size: 20px;
+    padding: 5px 10px;
+    font-size: 18px;
 }
 
-.create-section .img-input {
+/* .create-section .img-input {
     height: fit-content;
-}
+} */
 
 
 /* LOGIN PAGE STYLES */
@@ -395,20 +388,22 @@ form .form-title {
 
 .login-form {
     margin: auto;
-    width: fit-content;
-    padding: 35px;
+    width: 50%;
+    /* padding: 35px 40px; */
     border-radius: 15px;
     font-size: 20px;
 }
 
 .login-form fieldset {
-    padding: 20px ;
+    padding: 20px 30px;
+    border: 2px solid gray;
 }
 
 .login-form legend {
     font-size: 25px;
     font-weight: 600;
     padding: 10px;
+    width: auto;
 }
 
 .login-form input {

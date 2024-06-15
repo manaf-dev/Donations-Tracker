@@ -13,6 +13,7 @@ class Event(models.Model):
     is_completed = models.BooleanField(default=False)
     flyer = models.ImageField(upload_to='events_flyers', default='default.png')
     slug = models.SlugField(null=False, unique=True, default="")
+    thank_you_msg = models.TextField(blank=True, default='We appreciate your kindness.')
     
     def save(self, *args, **kwargs):
         #create slug

@@ -3,6 +3,9 @@
 
 {% block title %}Events{% endblock title %}
 
+{% block page-title %}
+    <p>Admin Page</p>
+{% endblock page-title %}
 
 {% block content %}
     {% include 'side-bar.html' %}
@@ -51,7 +54,7 @@
         </table>
 
         <div class="btn btn-secondary back-btn">
-            <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+            <a href="{% url 'events' %}">Back</a>
         </div>
             
     </section>
