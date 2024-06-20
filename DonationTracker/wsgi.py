@@ -11,8 +11,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DonationTracker.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DonationTracker.settings")
 
 application = get_wsgi_application()
 
-app = application
+# app = application
